@@ -52,6 +52,33 @@ player1 = Player(room['outside'])
 # If the user enters "q", quit the game.
 
 while True:
+    print(f"Location: {player1.room.getRoomName()}")
+    print(f"This is what you see {player1.room.getRoomDesc()}")
     new_direction = input("Nice work, move to another room (n, s, e, w) ")
-    print(player1.getRoomName())
+    if new_direction.strip() == 'n':
+        if hasattr(player1.room, 'n_to'):
+            player1.moveToRoom(player1.room.n_to)
+        else:
+            print('Sorry, that is a dead end... pick another direction')
+            print('\n')
+    elif new_direction.strip() == 's':
+        if hasattr(player1.room, 's_to'):
+            player1.moveToRoom(player1.room.s_to)
+        else:
+            print('Sorry, that is a dead end... pick another direction')
+            print('\n')
+    elif new_direction.strip() == 'e':
+        if hasattr(player1.room, 'e_to'):
+            player1.moveToRoom(player1.room.e_to)
+        else:
+            print('Sorry, that is a dead end... pick another direction')
+            print('\n')
+    elif new_direction.strip() == 'w':
+        if hasattr(player1.room, 'w_to'):
+            player1.moveToRoom(player1.room.w_to)
+        else:
+            print('Sorry, that is a dead end... pick another direction')
+            print('\n')
+    else:
+        print('please only type "n", "s", "e", or "w"')
     pass

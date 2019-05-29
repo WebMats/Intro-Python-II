@@ -5,4 +5,8 @@ class Room:
     def __init__(self, name, description):
         self.name = name
         self.description = description
+    def getRoomName(self):
+        return self.name
+    def getRoomDesc(self):
+        return self.description
     pass
