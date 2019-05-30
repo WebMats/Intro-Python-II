@@ -1,6 +1,14 @@
 from room import Room
 from player import Player
+import random
 # Declare all the rooms
+
+items = [
+    { "name": "rock", "description": "This is just a rock" },
+    { "name": "sword", "description": "known as 'Excalibur'" },
+    { "name": "flashlight", "description": "does not have batteries..." },
+    { "name": "batteries", "description": "can be put into a flashlight" }
+]
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -20,6 +28,12 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+room_keys = list(room.keys())
+for item in items:
+    ran_int = random.randint(1, 3)
+    room[room_keys[ran_int]].addItem(item)
+    
+
 
 # Link rooms together
 
@@ -32,6 +46,7 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
 #
 # Main
 #
@@ -39,7 +54,9 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 player1 = Player(room['outside'])
-
+print(f"Location: {player1.room.getRoomName()}")
+print(f"This is what you see {player1.room.getRoomDesc()}")
+player1.room.checkForItems()
 # Write a loop that:
 #
 # * Prints the current room name
@@ -52,33 +69,9 @@ player1 = Player(room['outside'])
 # If the user enters "q", quit the game.
 
 while True:
-    print(f"Location: {player1.room.getRoomName()}")
-    print(f"This is what you see {player1.room.getRoomDesc()}")
     new_direction = input("Nice work, move to another room (n, s, e, w) ")
-    if new_direction.strip() == 'n':
-        if hasattr(player1.room, 'n_to'):
-            player1.moveToRoom(player1.room.n_to)
-        else:
-            print('Sorry, that is a dead end... pick another direction')
-            print('\n')
-    elif new_direction.strip() == 's':
-        if hasattr(player1.room, 's_to'):
-            player1.moveToRoom(player1.room.s_to)
-        else:
-            print('Sorry, that is a dead end... pick another direction')
-            print('\n')
-    elif new_direction.strip() == 'e':
-        if hasattr(player1.room, 'e_to'):
-            player1.moveToRoom(player1.room.e_to)
-        else:
-            print('Sorry, that is a dead end... pick another direction')
-            print('\n')
-    elif new_direction.strip() == 'w':
-        if hasattr(player1.room, 'w_to'):
-            player1.moveToRoom(player1.room.w_to)
-        else:
-            print('Sorry, that is a dead end... pick another direction')
-            print('\n')
+    if new_direction.strip() in ['n', 's', 'w', 'e']:
+        player1.moveToRoom(new_direction)
     else:
         print('please only type "n", "s", "e", or "w"')
     pass
