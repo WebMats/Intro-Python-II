@@ -25,6 +25,20 @@ class Player:
         if not items_found:
             return
         self.putItemInInventory(items_found)
+    
+    def getInventory(self):
+        items = []
+        for item in self.inventory:
+            fetchedItem = item.get_item()
+            items.append(fetchedItem)
+        print('Here is your inventory: ', items)
+
+    def handleItemDrop(self, item):
+        for in_item in self.inventory:
+            name = in_item.get_item()['name']
+            if name == item:
+                self.inventory.remove(in_item)
+                self.room.addItem(in_item)
 
     def putItemInInventory(self, items):
         while not not items:
@@ -40,10 +54,12 @@ class Player:
                         items.remove(item)
                         self.room.updateItems(items)
                         item.on_take(itemInRoom)
-                    else:
-                        print('There is no item by that name')
+            elif choice_arr[0] == 'drop':
+                self.handleItemDrop(choice_arr[1])
             else:
                 print('You can only use a get action right now')
+        
+
 
 
     

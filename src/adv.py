@@ -73,6 +73,10 @@ while True:
     new_direction = input("Nice work, move to another room (n, s, e, w) ")
     if new_direction.strip() in ['n', 's', 'w', 'e']:
         player1.moveToRoom(new_direction)
+    elif new_direction.strip().startswith('drop'):
+        player1.handleItemDrop(new_direction.split(' ')[1])
+    elif new_direction.strip() in ['i', 'inventory']:
+        player1.getInventory()
     else:
         print('please only type "n", "s", "e", or "w"')
     pass
