@@ -1,13 +1,14 @@
 from room import Room
 from player import Player
+from item import Item
 import random
 # Declare all the rooms
 
 items = [
-    { "name": "rock", "description": "This is just a rock" },
-    { "name": "sword", "description": "known as 'Excalibur'" },
-    { "name": "flashlight", "description": "does not have batteries..." },
-    { "name": "batteries", "description": "can be put into a flashlight" }
+    Item("rock", "This is just a rock"),
+    Item("sword", "Known as 'Excalibur"),
+    Item("flashlight", "Does not have batteries..."),
+    Item("batteries", "Can be put into a flashlight")
 ]
 
 room = {

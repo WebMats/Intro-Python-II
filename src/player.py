@@ -34,10 +34,12 @@ class Player:
             choice_arr = choice.split(" ")
             if choice_arr[0] == 'get':
                 for item in items:
-                    if item['name'] == choice_arr[1]:
+                    itemInRoom = item.get_item()
+                    if itemInRoom['name'] == choice_arr[1]:
                         self.inventory.append(item)
                         items.remove(item)
                         self.room.updateItems(items)
+                        item.on_take(itemInRoom)
                     else:
                         print('There is no item by that name')
             else:

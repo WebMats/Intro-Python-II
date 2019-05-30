@@ -15,8 +15,9 @@ class Room:
     def checkForItems(self):
         if not not self.items:
             for item in self.items:
+                itemInRoom = item.get_item()
                 print('\n')
-                print(f"You foud a {item['name']} ({item['description']})")
+                print(f"You foud a {itemInRoom['name']} ({itemInRoom['description']})")
                 print('\n')
             return self.items
         else:
