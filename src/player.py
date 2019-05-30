@@ -39,6 +39,7 @@ class Player:
             if name == item:
                 self.inventory.remove(in_item)
                 self.room.addItem(in_item)
+                in_item.on_drop({"name": name})
 
     def putItemInInventory(self, items):
         while not not items:
